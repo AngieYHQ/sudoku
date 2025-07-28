@@ -5,6 +5,8 @@ This project is a simple web-based Sudoku puzzle generator built using Streamlit
 🔧 Features
 - Generate Sudoku puzzles with 3 difficulty levels
 - Color-coded cells for better readability
+  
+# How to play?
 - Game run on local machine, in your terminal:
 - Step 1 Download package
 - Step 2 extract the zip and save
