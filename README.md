@@ -40,7 +40,8 @@ Even though this app uses backtracking (not NetworkX yet), it’s inspired by gr
 - Let users input their own puzzle and validate it
 - Add solving assistant and timer
 ________________________________________________________________________
-  Scripts:
+Script explanation:
+  
 1️⃣ sudokuGenerator - script that generates a 9X9 sudoku board according to the sudoku puzzle rules - using the backtracking algorithm
 
 2️⃣ sudokuSolverAlgo - script that solves the sudoku puzzle - using the backtracking algorithm
