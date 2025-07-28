@@ -2,6 +2,20 @@
 ________________________________________________________________________
 This project is a simple web-based Sudoku puzzle generator built using Streamlit. It features 3 difficulty levels (Easy, Medium, and Hard) — and visually highlights puzzle numbers for better user experience.
 
+🔧 Features
+- Generate Sudoku puzzles with 3 difficulty levels
+- Color-coded cells for better readability
+- Game run on local machine, in your terminal:
+- Step 1 Download package
+- Step 2 extract the zip and save
+- Step 3 In this file location, right click find -> Open in terminal
+- Step 4, do this
+    copy and paste, run this ->pip install pygame
+    copy and paste, run this ->pip install python
+    copy and paste, run this ->copy and paste, run this -> python3 GUI.py
+  Done!
+________________________________________________________________________
+
 🎯 Why I Built This
 While exploring graph theory and tools like NetworkX, I came across the concept of graph coloring — a powerful technique used to solve constraint problems. Graph coloring forms the foundation for solving real-world challenges like:
 
@@ -18,18 +32,13 @@ Even though this app uses backtracking (not NetworkX yet), it’s inspired by gr
 -  How Sudoku can be modeled as a graph with 81 nodes and conflict edges
 -  Backtracking as a fundamental algorithm
 -  Streamlit for rapid web prototyping
--  Visualizing data using colored HTML tables
-  
-🔧 Features
-- Generate Sudoku puzzles with 3 difficulty levels
-- Color-coded cells for better readability
-- Simple, responsive UI via Streamlit
+-  Visualizing data using colored HTML tables  
 
 🚀 Future Plans
 - Solve puzzles using graph coloring via NetworkX
 - Let users input their own puzzle and validate it
 - Add solving assistant and timer
-
+________________________________________________________________________
   Scripts:
 1️⃣ sudokuGenerator - script that generates a 9X9 sudoku board according to the sudoku puzzle rules - using the backtracking algorithm
 2️⃣ sudokuSolverAlgo - script that solves the sudoku puzzle - using the backtracking algorithm
