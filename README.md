@@ -8,8 +8,8 @@ This project is a simple web-based Sudoku puzzle generator built using Streamlit
   
 # How to play?
 - Game run on local machine, in your terminal:
-- Step 1 Download package
-- Step 2 extract the zip and save
+- Step 1 Download package, in this page, go to the drop down arrow in green botton [Code] _> Download Zip file
+- Step 2 Open you laptop file folder, extract the downlaoded zip and save
 - Step 3 In this file location, right click find -> Open in terminal
 - Step 4, do this
     copy and paste, run this ->pip install pygame
