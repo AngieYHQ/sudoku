@@ -11,7 +11,7 @@ This project is a simple Sudoku puzzle generator built in python. It features 3 
 Game runs on local machine, in your terminal, I will guide you step by step ;)
 
 - Step 1, Download package, in this page, go to the drop down arrow in green botton [Code] -> Download Zip file
-- Step 2, Open downloaded zip, rick click to finf "Extract All", then save
+- Step 2, Open downloaded zip, rick click anywhere to find "Extract All", then save
 - Step 3, Go to save file location, right click find -> Open in terminal
 - Step 4, copy and paste, run this -> pip install pygame
 - Step 5, copy and paste, run this  -> pip install python
