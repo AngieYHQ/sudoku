@@ -1,4 +1,3 @@
-
 import random
 import copy
 
@@ -6,10 +5,10 @@ def is_valid(grid, row, col, num):
     for i in range(9):
         if grid[row][i] == num or grid[i][col] == num:
             return False
-    box_start_row, box_start_col = 3*(row//3), 3*(col//3)
+    box_start_row, box_start_col = 3 * (row // 3), 3 * (col // 3)
     for i in range(3):
         for j in range(3):
-            if grid[box_start_row+i][box_start_col+j] == num:
+            if grid[box_start_row + i][box_start_col + j] == num:
                 return False
     return True
 
@@ -27,18 +26,24 @@ def solve(grid):
     return True
 
 def generate_full_solution():
-    grid = [[0]*9 for _ in range(9)]
+    grid = [[0] * 9 for _ in range(9)]
+    fill_grid(grid)
+    return grid
+
+def fill_grid(grid):
     nums = list(range(1, 10))
     for i in range(9):
         for j in range(9):
-            random.shuffle(nums)
-            for num in nums:
-                if is_valid(grid, i, j, num):
-                    grid[i][j] = num
-                    if solve(copy.deepcopy(grid)):
-                        break
-                    grid[i][j] = 0
-    return grid
+            if grid[i][j] == 0:
+                random.shuffle(nums)
+                for num in nums:
+                    if is_valid(grid, i, j, num):
+                        grid[i][j] = num
+                        if solve(copy.deepcopy(grid)):
+                            return True
+                        grid[i][j] = 0
+                return False
+    return True
 
 def remove_numbers(grid, difficulty):
     level_map = {
