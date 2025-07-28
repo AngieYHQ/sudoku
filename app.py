@@ -24,43 +24,61 @@ if st.button("Generate Sudoku"):
 if "puzzle" in st.session_state:
     st.subheader(f"{st.session_state.difficulty} Puzzle")
 
-    def render_colored_grid(grid):  # <--- FIXED: remove extra spaces
-        def cell_style(value, row, col):
-            if value == 0:
-                display = "."
-                color = "#ccc"
-                weight = "normal"
-            else:
-                display = value
-                colors = {
-                    1: "#1f77b4", 2: "#ff7f0e", 3: "#2ca02c", 4: "#d62728", 5: "#9467bd",
-                    6: "#8c564b", 7: "#e377c2", 8: "#7f7f7f", 9: "#bcbd22"
-                }
-                color = colors[value]
-                weight = "bold"
+    def render_colored_grid(grid):
+    def cell_style(value, row, col):
+        if value == 0:
+            display = "."
+            color = "#ccc"
+            weight = "normal"
+        else:
+            display = value
+            colors = {
+                1: "#1f77b4", 2: "#ff7f0e", 3: "#2ca02c", 4: "#d62728", 5: "#9467bd",
+                6: "#8c564b", 7: "#e377c2", 8: "#7f7f7f", 9: "#bcbd22"
+            }
+            color = colors[value]
+            weight = "bold"
 
-            border_style = "1px solid #ccc"
-            if row % 3 == 0:
-                top = "2px solid black"
-            else:
-                top = border_style
-            if col % 3 == 0:
-                left = "2px solid black"
-            else:
-                left = border_style
+        # Normal grid lines
+        top = "1px solid #ccc"
+        left = "1px solid #ccc"
+        right = "1px solid #ccc"
+        bottom = "1px solid #ccc"
 
-            return f'<td style="width: 40px; height: 40px; text-align: center; color: {color}; font-weight: {weight}; border-top: {top}; border-left: {left}; border-right: {border_style}; border-bottom: {border_style};">{display}</td>'
+        # Thicker borders for 3x3 boxes
+        if row % 3 == 0:
+            top = "3px solid black"
+        if col % 3 == 0:
+            left = "3px solid black"
+        if row == 8:
+            bottom = "3px solid black"
+        if col == 8:
+            right = "3px solid black"
 
-        html = '<table style="border-collapse: collapse;">'
-        for i, row in enumerate(grid):
-            html += "<tr>"
-            for j, val in enumerate(row):
-                html += cell_style(val, i, j)
-            html += "</tr>"
-        html += "</table>"
-        st.markdown(html, unsafe_allow_html=True)
+        return f'''
+        <td style="
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            color: {color};
+            font-weight: {weight};
+            border-top: {top};
+            border-left: {left};
+            border-right: {right};
+            border-bottom: {bottom};
+        ">{display}</td>
+        '''
 
-    render_colored_grid(st.session_state.puzzle)
+    html = '<table style="border-collapse: collapse;">'
+    for i, row in enumerate(grid):
+        html += "<tr>"
+        for j, val in enumerate(row):
+            html += cell_style(val, i, j)
+        html += "</tr>"
+    html += "</table>"
+
+    st.markdown(html, unsafe_allow_html=True)
+
 
 
     df = pd.DataFrame(st.session_state.puzzle)
