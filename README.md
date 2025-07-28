@@ -14,7 +14,7 @@ This project is a simple web-based Sudoku puzzle generator built using Streamlit
 - Step 4, copy and paste, run this -> pip install pygame
 - Step 5, copy and paste, run this  -> pip install python
 - Step 6, copy and paste, run this -> copy and paste, run this -> python3 GUI.py
-  Done! A game window will pop up and ask you choose game difficulty to start game
+- Done! A game window will pop up and ask you choose game difficulty to start game
 ________________________________________________________________________
 
 🎯 Why I Built This
