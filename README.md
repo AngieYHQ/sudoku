@@ -1,6 +1,6 @@
 # Sudoku Puzzle Generator (with Graph Theory Inspiration)
 ________________________________________________________________________
-This project is a simple web-based Sudoku puzzle generator built using Streamlit. It features 3 difficulty levels — Easy, Medium, and Hard — and visually highlights puzzle numbers for better user experience.
+This project is a simple web-based Sudoku puzzle generator built using Streamlit. It features 3 difficulty levels (Easy, Medium, and Hard) — and visually highlights puzzle numbers for better user experience.
 
 🎯 Why I Built This
 While exploring graph theory and tools like NetworkX, I came across the concept of graph coloring — a powerful technique used to solve constraint problems. Graph coloring forms the foundation for solving real-world challenges like:
