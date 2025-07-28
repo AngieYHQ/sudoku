@@ -11,11 +11,10 @@ This project is a simple web-based Sudoku puzzle generator built using Streamlit
 - Step 1 Download package, in this page, go to the drop down arrow in green botton [Code] _> Download Zip file
 - Step 2 Open you laptop file folder, extract the downlaoded zip and save
 - Step 3 Go to save file location, mouse right click find -> Open in terminal
-- Step 4, do this
-    copy and paste, run this ->pip install pygame
-    copy and paste, run this ->pip install python
-    copy and paste, run this ->copy and paste, run this -> python3 GUI.py
-  Done!
+- Step 4, copy and paste, run this -> pip install pygame
+- Step 5, copy and paste, run this  -> pip install python
+- Step 6, copy and paste, run this -> copy and paste, run this -> python3 GUI.py
+  Done! A game window will pop up and ask you choose difficulty
 ________________________________________________________________________
 
 🎯 Why I Built This
