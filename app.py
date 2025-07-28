@@ -24,24 +24,42 @@ if st.button("Generate Sudoku"):
 if "puzzle" in st.session_state:
     st.subheader(f"{st.session_state.difficulty} Puzzle")
 
-    def render_colored_grid(grid):
-        def cell_style(value):
-            if value == 0:
-                return '<td style="width: 40px; height: 40px; text-align: center; border: 1px solid #ccc; color: #ccc;">.</td>'
+   def render_colored_grid(grid):
+    def cell_style(value, row, col):
+        if value == 0:
+            display = "."
+            color = "#ccc"
+            weight = "normal"
+        else:
+            display = value
             colors = {
                 1: "#1f77b4", 2: "#ff7f0e", 3: "#2ca02c", 4: "#d62728", 5: "#9467bd",
                 6: "#8c564b", 7: "#e377c2", 8: "#7f7f7f", 9: "#bcbd22"
             }
-            return f'<td style="width: 40px; height: 40px; text-align: center; border: 1px solid #ccc; color: {colors[value]}; font-weight: bold;">{value}</td>'
+            color = colors[value]
+            weight = "bold"
 
-        html = '<table style="border-collapse: collapse;">'
-        for row in grid:
-            html += "<tr>"
-            for val in row:
-                html += cell_style(val)
-            html += "</tr>"
-        html += "</table>"
-        st.markdown(html, unsafe_allow_html=True)
+        border_style = "1px solid #ccc"
+        if row % 3 == 0:
+            top = "2px solid black"
+        else:
+            top = border_style
+        if col % 3 == 0:
+            left = "2px solid black"
+        else:
+            left = border_style
+
+        return f'<td style="width: 40px; height: 40px; text-align: center; color: {color}; font-weight: {weight}; border-top: {top}; border-left: {left}; border-right: {border_style}; border-bottom: {border_style};">{display}</td>'
+
+    html = '<table style="border-collapse: collapse;">'
+    for i, row in enumerate(grid):
+        html += "<tr>"
+        for j, val in enumerate(row):
+            html += cell_style(val, i, j)
+        html += "</tr>"
+    html += "</table>"
+    st.markdown(html, unsafe_allow_html=True)
+
 
     render_colored_grid(st.session_state.puzzle)
 
