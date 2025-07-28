@@ -1,6 +1,6 @@
 # Sudoku Puzzle Generator (with Graph Theory Inspiration)
 ________________________________________________________________________
-This project is a simple web-based Sudoku puzzle generator built using Streamlit. It features 3 difficulty levels (Easy, Medium, and Hard) — and visually highlights puzzle numbers for better user experience.
+This project is a simple Sudoku puzzle generator built in python. It features 3 difficulty levels (Easy, Medium, and Hard) — and visually highlights puzzle numbers for better user experience.
 
 🔧 Features
 - Generate Sudoku puzzles with 3 difficulty levels
