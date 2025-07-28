@@ -1,75 +1,78 @@
 import streamlit as st
-import pandas as pd
-import time
-from sudoku_generator import generate_full_solution, remove_numbers, solve
-import copy
+import numpy as np
 
-st.set_page_config(page_title="Sudoku Generator", layout="wide")
-st.title("🧩 Sudoku Puzzle Generator")
+st.set_page_config(page_title="Sudoku Solver", layout="wide")
+st.title("🧩 Sudoku Puzzle")
 
-# Session state
-if "start_time" not in st.session_state:
-    st.session_state.start_time = None
-if "elapsed" not in st.session_state:
-    st.session_state.elapsed = 0
-if "leaderboard" not in st.session_state:
-    st.session_state.leaderboard = []
-if "user_grid" not in st.session_state:
-    st.session_state.user_grid = []
+# Initial puzzle from the image
+puzzle = [
+    [0, 2, 0, 7, 1, 0, 0, 0, 8],
+    [0, 0, 1, 0, 9, 0, 6, 0, 0],
+    [0, 6, 0, 5, 0, 0, 0, 9, 4],
+    [3, 0, 0, 0, 0, 0, 0, 0, 2],
+    [0, 0, 0, 1, 3, 6, 0, 0, 0],
+    [7, 0, 0, 0, 0, 0, 0, 5, 0],
+    [2, 0, 4, 0, 7, 0, 3, 1, 0],
+    [0, 7, 0, 0, 1, 0, 2, 0, 0],
+    [0, 0, 6, 5, 0, 2, 0, 0, 7]
+]
 
-difficulty = st.selectbox("Select difficulty level", ["Easy", "Medium", "Hard"])
+# Session state for editable grid
+if "inputs" not in st.session_state:
+    st.session_state.inputs = [[st.text_input("", str(puzzle[i][j]) if puzzle[i][j] != 0 else "", key=f"cell_{i}_{j}",
+                                disabled=puzzle[i][j] != 0, max_chars=1) for j in range(9)] for i in range(9)]
 
-if st.button("Generate Sudoku"):
-    st.session_state.start_time = time.time()
-    full_solution = generate_full_solution()
-    puzzle = remove_numbers(copy.deepcopy(full_solution), difficulty)
-    st.session_state.solution = full_solution
-    st.session_state.puzzle = puzzle
-    st.session_state.difficulty = difficulty
-    st.session_state.user_grid = [[puzzle[i][j] if puzzle[i][j] != 0 else "" for j in range(9)] for i in range(9)]
+# Display grid
+st.subheader("Fill in the blank cells:")
+for i in range(9):
+    cols = st.columns(9)
+    for j in range(9):
+        cols[j].text_input("", st.session_state.inputs[i][j], key=f"cell_display_{i}_{j}",
+                           disabled=True)
 
-if "puzzle" in st.session_state:
-    st.subheader(f"{st.session_state.difficulty} Puzzle (Enter your answers)")
+# Check solution button
+if st.button("Check Solution"):
+    def is_valid(board):
+        for i in range(9):
+            row = []
+            col = []
+            box = []
+            for j in range(9):
+                # Row
+                r_val = board[i][j]
+                if r_val in row and r_val != 0:
+                    return False
+                elif r_val != 0:
+                    row.append(r_val)
 
-    edited_grid = []
+                # Column
+                c_val = board[j][i]
+                if c_val in col and c_val != 0:
+                    return False
+                elif c_val != 0:
+                    col.append(c_val)
 
+                # Box
+                r = 3 * (i // 3) + (j // 3)
+                c = 3 * (i % 3) + (j % 3)
+                b_val = board[r][c]
+                if b_val in box and b_val != 0:
+                    return False
+                elif b_val != 0:
+                    box.append(b_val)
+        return True
+
+    # Convert inputs to numbers
+    current_board = []
     for i in range(9):
-        cols = st.columns(9)
         row = []
         for j in range(9):
-            if st.session_state.puzzle[i][j] != 0:
-                cols[j].markdown(f"<div style='text-align: center; font-weight: bold; font-size: 20px; padding: 10px; border: 1px solid #ccc; background-color: #f0f0f0;'>{st.session_state.puzzle[i][j]}</div>", unsafe_allow_html=True)
-                row.append(st.session_state.puzzle[i][j])
-            else:
-                key = f"cell_{i}_{j}"
-                value = cols[j].number_input("", min_value=1, max_value=9, value=int(st.session_state.user_grid[i][j]) if st.session_state.user_grid[i][j] != "" else 1, key=key)
-                row.append(value)
-        edited_grid.append(row)
+            val = st.session_state[f"cell_{i}_{j}"]
+            row.append(int(val) if val.isdigit() else 0)
+        current_board.append(row)
 
-    # Show timer
-    if st.session_state.start_time:
-        st.session_state.elapsed = int(time.time() - st.session_state.start_time)
-        mins, secs = divmod(st.session_state.elapsed, 60)
-        st.success(f"⏱ Time elapsed: {mins:02d}:{secs:02d}")
+    if is_valid(current_board):
+        st.success("✅ The solution is valid so far!")
+    else:
+        st.error("❌ Invalid Sudoku solution. Check for duplicate numbers.")
 
-    if st.button("Submit"):
-        st.session_state.start_time = None
-        correct = st.session_state.solution
-        user_correct = edited_grid == correct
-        mins, secs = divmod(st.session_state.elapsed, 60)
-
-        if user_correct:
-            st.success(f"🎉 Well done! You solved it correctly in {mins:02d}:{secs:02d}")
-        else:
-            st.error("❌ Some answers are incorrect. Keep trying!")
-
-        st.session_state.leaderboard.append({
-            "Difficulty": st.session_state.difficulty,
-            "Time (min:sec)": f"{mins:02d}:{secs:02d}",
-            "Solved": "Yes" if user_correct else "No"
-        })
-
-    # Show leaderboard
-    if st.session_state.leaderboard:
-        st.markdown("### 🏆 Leaderboard")
-        st.dataframe(pd.DataFrame(st.session_state.leaderboard))
