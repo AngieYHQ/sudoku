@@ -45,10 +45,10 @@ Even though this app uses backtracking (not NetworkX yet), it’s inspired by gr
 ________________________________________________________________________
 Script explanation:
   
-1️⃣ sudokuGenerator - script that generates a 9X9 sudoku board according to the sudoku puzzle rules - using the backtracking algorithm
+(1) sudokuGenerator - script that generates a 9X9 sudoku board according to the sudoku puzzle rules - using the backtracking algorithm
 
-2️⃣ sudokuSolverAlgo - script that solves the sudoku puzzle - using the backtracking algorithm
+(2) sudokuSolverAlgo - script that solves the sudoku puzzle - using the backtracking algorithm
 
-3️⃣ chooseLevel - simple script for the level difficulty GUI
+(3) chooseLevel - simple script for the level difficulty GUI
 
-4️⃣ GUI - the main script, the player runs this script to play the game
+(4) GUI - the main script, the player runs this script to play the game
